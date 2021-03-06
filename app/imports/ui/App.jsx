@@ -2,6 +2,8 @@ import React from 'react';
 import { Hello } from './Hello.jsx';
 import { Info } from './Info.jsx';
 import { Task } from './Task';
+import { useTracker } from 'meteor/react-meteor-data';
+import { TasksCollection } from '/imports/api/TasksCollection';
 
 const tasks = [
   {_id: 1, text: 'Get Insurance Number from Medquest'},
@@ -9,7 +11,10 @@ const tasks = [
   {_id: 3, text: 'Start on'},
 ];
 
-export const App = () => (
+export const App = () => {
+  
+const tasks = useTracker(() => TasksCollection.find({}).fetch());
+return(
   <div>
     <h1>Welcome to Meteor!</h1>
     <ul>
@@ -17,6 +22,7 @@ export const App = () => (
     </ul>
   </div>
 );
+};
 
 
 
